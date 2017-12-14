@@ -1,17 +1,37 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      Settings
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
+    <ion-list-header>General</ion-list-header>
     <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+      <ion-label>Server</ion-label>
+      <ion-input
+        reuqired
+        type="text"
+        clearInput="true"
+        placeholder="Address of the server that you save your password at"
+        [(ngModel)]="address"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <button ion-button full color="light" (click)="backToPasswordList()">Cancel</button>
+          </ion-col>
+          <ion-col col-12>
+            <!-- TODO: this-->
+            <button ion-button full (click)="changeServerAddress()">Confirm</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </ion-list>
 </ion-content>

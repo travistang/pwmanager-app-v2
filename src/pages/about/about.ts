@@ -1,5 +1,5 @@
-import { Component,Input, } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component,Input, Output, EventEmitter } from '@angular/core';
+import { NavController,Tabs } from 'ionic-angular';
 import { Password } from '../../data/password'
 @Component({
   selector: 'page-about',
@@ -9,8 +9,12 @@ export class AboutPage {
 
   @Input()
   password: Password;
+  // store the reference of the parent tab (so that we can return to the password list tab)
+  tab: Tabs;
+
 
   constructor(public navCtrl: NavController) {
+    this.tab = navCtrl.parent;
     this.password = new Password("");
     this.generatePassword();
   }
@@ -67,15 +71,19 @@ export class AboutPage {
     if(this.password.punctuations)i++;
     return i;
   }
-  optionChecked(event) {
-    if (this.numOptions() > 1) this.generatePassword()
+  optionChecked(type) {
+    if (this.numOptions() >= 1) this.generatePassword()
     else {
-      console.log("violated")
-      this.password.lowercase = (event == 'lowercase')
-      this.password.uppercase = (event == 'uppercase')
-      this.password.numbers = (event == 'numbers')
-      this.password.punctuations = (event == 'punctuations')
-
+      this.password.lowercase = (type == 'lowercase');
+      this.password.uppercase = (type == 'uppercase');
+      this.password.numbers = (type == 'numbers');
+      this.password.punctuations = (type == 'punctuations');
     }
   }
+
+  backToPasswordList() {
+    this.tab.select(0);
+  }
+
+  
 }

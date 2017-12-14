@@ -1,4 +1,3 @@
-import {Options} from './option'
 export class Password {
   name: String;
   password: String;
@@ -6,9 +5,10 @@ export class Password {
   uppercase: Boolean = true;
   numbers: Boolean = true;
   punctuations: Boolean = true;
-  length: Int = 8;
-  constructor(public name: String) {
-    this.name = name;
+  length: number = 8;
+
+  constructor(pwName: String) {
+    this.name = pwName;
     this.password = "";
   }
 }

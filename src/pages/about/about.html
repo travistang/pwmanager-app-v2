@@ -11,32 +11,32 @@
   <ion-list>
     <ion-item>
       <ion-label fixed>Name</ion-label>
-      <ion-input reuqired type="text" [(ngModel)]="password.name"></ion-input>
+      <ion-input reuqired type="text" [(ngModel)]="password.name" clearInput="true" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>Password</ion-label>
-      <ion-input required disabled type="text" [(ngModel)]="password.password"></ion-input>
+      <ion-input required disabled type="text" (click)="generatePassword()" [(ngModel)]="password.password"></ion-input>
     </ion-item>
     <ion-grid>
       <ion-row>
 	      <ion-col col-6>
       		<ion-item>
       	    <ion-label>Lowercase</ion-label>
-      		  <ion-toggle (ionChange) = "optionChecked($event)" [(ngModel)]="password.lowercase"></ion-toggle>
+      		  <ion-toggle (click) = "optionChecked($event,'lowercase')" [(checked)]="password.lowercase" [(ngModel)]="password.lowercase"></ion-toggle>
           </ion-item>
           <ion-item>
             <ion-label>Uppercase</ion-label>
-            <ion-toggle (ionChange) = "optionChecked($event)" [(ngModel)]="password.uppercase"></ion-toggle>
+            <ion-toggle (click) = "optionChecked($event,'uppercase')" [(checked)]="password.uppercase" [(ngModel)]="password.uppercase"></ion-toggle>
       		</ion-item>
 	      </ion-col>
 	      <ion-col col-6>
           <ion-item>
             <ion-label>Numbers</ion-label>
-            <ion-toggle (ionChange) = "optionChecked($event)" [(ngModel)]="password.numbers"></ion-toggle>
+            <ion-toggle (click) = "optionChecked($event,'numbers')" [(checked)]="password.numbers" [(ngModel)]="password.numbers"></ion-toggle>
           </ion-item>
           <ion-item>
             <ion-label>Punctuations</ion-label>
-            <ion-toggle (ionChange) = "optionChecked($event)" [(ngModel)]="password.punctuations"></ion-toggle>
+            <ion-toggle (click) = "optionChecked($event,'punctuations')" [(checked)]="password.punctuations" [(ngModel)]="password.punctuations"></ion-toggle>
           </ion-item>
 	      </ion-col>
       </ion-row>
@@ -50,6 +50,13 @@
           </ion-item>
         </ion-col>
       <ion-row>
+        <ion-col col-12>
+          <button ion-button full color="light" (click)="backToPasswordList()">Cancel</button>
+        </ion-col>
+        <ion-col col-12>
+          <!-- TODO: this-->
+          <button ion-button full (click)="changeServerAddress()">Confirm</button>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-list>
