@@ -4,9 +4,9 @@ import { Storage, LocalStorage } from '@ionic/storage';
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'contact.html'
+  templateUrl: 'settings.html'
 })
-export class ContactPage {
+export class SettingsPage {
   tab: Tabs;
   storage: Storage;
   address: String = "";
