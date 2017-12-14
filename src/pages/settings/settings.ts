@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController,Tabs } from 'ionic-angular';
-import { Storage, LocalStorage } from '@ionic/storage';
-
+import { PasswordServiceProvider } from '../../providers/password-service/password-service'
 @Component({
   selector: 'page-contact',
-  templateUrl: 'settings.html'
+  templateUrl: 'settings.html',
+  providers: [PasswordServiceProvider],
 })
 export class SettingsPage {
   tab: Tabs;
-  storage: Storage;
+  passwordService: PasswordServiceProvider;
   address: String = "";
 
-  constructor(public navCtrl: NavController) {
-    this.storage = new Storage(LocalStorage);
+  constructor(public navCtrl: NavController,_passwordService: PasswordServiceProvider) {
+    this.passwordService = _passwordService;
     this.getServerAddress(); // get the server address from the database
     this.tab = navCtrl.parent;
   }
@@ -23,12 +23,14 @@ export class SettingsPage {
   }
 
   getServerAddress() {
-    this.storage.get('server').then(addr => this.address = addr);
+    this.passwordService.getServerAddress().then(addr => this.address = addr);
   }
   changeServerAddress() {
     // TODO: validations?
-    this.storage.set('server',this.address);
+    // TODO: this
+    this.passwordService.setServerAddress(this.address);
     this.backToPasswordList();
+
   }
 
   backToPasswordList() {
